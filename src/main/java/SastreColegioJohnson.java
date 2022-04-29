@@ -1,4 +1,4 @@
-public class SastreColegioJohnson {
+public class SastreColegioJohnson implements Sastre{
   public Prenda crearParteSuperior() {
     PrendaBorrador parteSuperior = new PrendaBorrador();
     parteSuperior.cargarTipoDePrenda(TipoDePrenda.CAMISA);
