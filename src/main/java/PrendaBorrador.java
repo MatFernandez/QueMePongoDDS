@@ -8,6 +8,8 @@ public class PrendaBorrador {
   Color colorSecundario;
   Trama trama = Trama.LISA;
 
+  Double temperaturaMaxima;
+
   public PrendaBorrador cargarTipoDePrenda(TipoDePrenda prenda) {
     this.tipoDePrenda = Objects.requireNonNull(tipoDePrenda);
     return this;
@@ -44,7 +46,7 @@ public class PrendaBorrador {
     if (this.colorPrincipal == null) {
       throw new RuntimeException("Imposible crear la prenda. El color principal no puede ser nulo. ");
     }
-    return new Prenda(this.tipoDePrenda, this.material, this.colorPrincipal, this.colorSecundario, this.trama);
+    return new Prenda(this.tipoDePrenda, this.material, this.colorPrincipal, this.colorSecundario, this.trama, this.temperaturaMaxima);
   }
 
 }
