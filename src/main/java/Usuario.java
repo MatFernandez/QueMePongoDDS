@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-  Guardarropas guardarropas = new Guardarropas();
+  List<Guardarropas> guardarropas = new ArrayList<>();
+  List<Propuesta> propuestas = new ArrayList<>();
   String ciudad;
 
 
@@ -9,18 +11,44 @@ public class Usuario {
     this.ciudad = ciudad;
   }
 
-  public void agregarPrenda(Prenda prenda){
+  public void agregarPrenda(Prenda prenda, Guardarropas guardarropas) {
     guardarropas.agregarPrenda(prenda);
   }
 
-  public List<Prenda> getPrendas() {
-    return guardarropas.getPrendas();
+  public void quitarPrenda(Prenda prenda, Guardarropas guardarropas) {
+    guardarropas.quitarPrenda(prenda);
   }
-  public List<Atuendo> recibirSugerenciaClimatica(){
+
+
+  public List<Prenda> getPrendas() {
+    return guardarropas.get(0).getPrendas();
+  }
+
+  public List<Atuendo> recibirSugerenciaClimatica() {
     ServicioMeteorologico servicioMeteorologico = new ServicioMeteorologico(ciudad);
     SugerenciasClimaticas sugerenciaClima = new SugerenciasClimaticas(servicioMeteorologico.getTemperaturaActual());
-    return sugerenciaClima.generarSugerencias(guardarropas.getPrendas());
+    return sugerenciaClima.generarSugerencias(guardarropas.get(0).getPrendas());
   }
-  
 
+
+  public void agregarGuardarropas(Guardarropas unGuardarropas) {
+    guardarropas.add(unGuardarropas);
+  }
+
+  public void eliminarGuardarropas(Guardarropas unGuardarropas) {
+    guardarropas.remove(unGuardarropas);
+  }
+
+  public void recibirNuevaPropuesta(Guardarropas guardarropas, Prenda prenda, PropuestaDeModificacion propuestaDeModificacion) {
+    Propuesta propuesta = new Propuesta(guardarropas, prenda, propuestaDeModificacion);
+    propuestas.add(propuesta);
+  }
+
+  public void aceptarPropuestaRecibida(Propuesta propuesta) {
+    propuesta.aceptarPropuesta(this);
+  }
+
+  public void rechazarPropuestaRecibida(Propuesta propuesta) {
+    propuesta.rechazarPropuesta();
+  }
 }
